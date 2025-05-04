@@ -1,0 +1,53 @@
+.MainContainer{
+    display: flex;
+    flex-direction: row;
+    padding: 4px;
+    border: 10px black;
+    
+}
+.MainContainer ul {
+    display: flex;
+    flex: 1;
+    padding-left: 0px;
+    margin: 0px;
+}
+
+.MainContainer li  {
+    list-style-type: none;
+
+}
+
+.MainContainerImg{
+    display: flex;
+    justify-content: flex-start;
+    
+    margin-right: auto;
+}
+
+.MainContainerButtons{
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
+    gap: 20px;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.Link {
+    all: unset;
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+hr{
+    position: relative;
+  width: 100vw;       /* Full viewport width */
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw; /* Cancel out container centering */
+  margin-right: -50vw;
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+}

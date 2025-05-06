@@ -44,7 +44,7 @@ public SecurityFilterChain filterChain(HttpSecurity http, JWTAuthFilter jwtAuthF
         .csrf(csrf -> csrf.disable())
         .cors(cors -> cors.configurationSource(corsConfigurationSource))
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("api/v1/users/signup", "api/v1/users/login").permitAll()
+            .requestMatchers("/api/v1/users/signup", "/api/v1/users/login").permitAll()
             .anyRequest().authenticated()
         )
         .httpBasic(httpBasic -> httpBasic.disable())

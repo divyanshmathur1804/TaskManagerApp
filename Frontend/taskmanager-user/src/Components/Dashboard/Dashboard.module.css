@@ -1,0 +1,139 @@
+.mainContainer{
+    display: flex;
+    
+}
+
+.sideContainer{
+    position: absolute; /* or fixed depending on use case */
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 20%;
+    background-color: #0795FE; /* or match the actual hex */
+    text-align: center;
+}
+
+.WorkSpaceTitle{
+    color: white;
+    
+}
+.DashboardContainer{
+    position: absolute;
+    left: 20%;
+    top: 0;
+    width: 80%;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+.DashboardCardContainer{
+    display: flex;
+    height: 30%;
+    align-items: center;
+    background-color: #FFB726;
+    margin: 10px;
+    border-radius: 10px;
+    flex-direction: column;
+    
+}
+
+.DashboardAddBtnContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+    width: 100%;
+    flex-direction: column;
+    
+}
+
+.DashboardInnerCardContainer{
+    display: flex;
+    width: 90%;
+    height: 80%;
+    background-color: white;
+    margin: 15px;
+    margin-bottom: 0px;
+    border-radius: 10px;
+    align-items: center;
+    gap: 30px;
+    justify-content: center;
+}
+.ProjectContainer{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.DashboardAddBtnContainer button{
+    all: unset;
+    cursor: pointer;
+    background-color: #0795FE;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    font-weight: 500;
+}
+.ProjectContainer ul{
+    padding: 0px;
+}
+.ProjectContainer li{
+    list-style-type: none;
+    font: normal normal 700 16px / 32px Ubuntu;
+    margin-bottom: 5px;
+    width: 100%;
+}
+.ProjectContainer li :hover{
+    background-color: white;
+    color: #0795FE;
+}
+.InnerProjectContainer{
+    width: 100%;
+}
+.InnerProjectContainerLink{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+}
+.CardTaskImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+    flex-direction: column;
+    gap: 5px;
+    margin-right: 10px;
+    width: 25%;
+}
+.CardTaskImage h2{
+    margin: 0px;
+}
+.MyTeamsBtn{
+    display: flex;
+    align-self: flex-end;
+    
+    height: 40%;
+    width: 100%;
+    align-items: center;
+    
+}
+.MyTeamsBtnLink{
+    display: flex;
+    text-decoration: none;
+    color: #FFB726;
+    width: 10%;
+    height: 50%;
+    margin-left: auto;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-weight: 500;
+    padding: 2px;
+}

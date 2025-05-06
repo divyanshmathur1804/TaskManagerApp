@@ -20,7 +20,7 @@ function Navbar(){
                 </div>
             </ul>
         </div>
-        <hr/>
+        <hr className={`${NavbarStyle.MainHR}`} />
         </>
     )
 

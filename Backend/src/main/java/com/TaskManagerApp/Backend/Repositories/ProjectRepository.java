@@ -1,15 +1,16 @@
 package com.TaskManagerApp.Backend.Repositories;
 
-import java.util.Optional;
-
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import com.TaskManagerApp.Backend.Entities.User;
+import com.TaskManagerApp.Backend.Entities.Project;
 import java.util.List;
 
+
 @Repository
-public interface UserRepository extends MongoRepository<User,String> {
-    public Optional<User> findUserByEmail(String email);
+public interface ProjectRepository extends MongoRepository<Project,String> {
+    List<Project> findByTeamId(String teamId);
+
+
     
 }

@@ -40,7 +40,7 @@
   text-decoration: none;
 }
 
-hr{
+.MainHR{
     position: relative;
   width: 100vw;       /* Full viewport width */
   left: 50%;

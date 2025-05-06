@@ -56,10 +56,13 @@ public class UserController {
         
     }
 
-    @GetMapping("/dashboard")
-    public List<User> ShowAllUsers() {
-        return userService.findAllUsers();
+    @GetMapping("/search")
+    public ResponseEntity<Optional<User>> getMethodName(@RequestParam String email) {
+        return ResponseEntity.ok(userService.findUserByEmail(email));
     }
+    
+
+    
     
     
     

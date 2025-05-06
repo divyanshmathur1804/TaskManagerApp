@@ -1,0 +1,28 @@
+.PageContainer{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+.MainContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 30px;
+}
+.TextContanier{
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}
+.TextContanier p{
+    margin: 0px;
+    font: normal normal 700 14px / 16px Ubuntu;
+    color: #585b61;
+}
+
+.TextContanier h3{
+    margin: 0px;
+    font: normal normal 700 24px / 28px Ubuntu;
+    text-align: left;
+}

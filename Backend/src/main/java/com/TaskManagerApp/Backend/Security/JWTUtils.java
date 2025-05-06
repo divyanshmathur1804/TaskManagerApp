@@ -10,7 +10,7 @@ import java.util.Date;
 @Component
 public class JWTUtils {
     private final String jwtSecret = "D92mLZxG@e1Wm*8FvRp3^zQ!B7hLXG3!";
-    private final long jwtExpirationMs = 86400000; // 24 hours
+    private final long jwtExpirationMs = 2592000000L; // 24 hours
 
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(jwtSecret.getBytes());

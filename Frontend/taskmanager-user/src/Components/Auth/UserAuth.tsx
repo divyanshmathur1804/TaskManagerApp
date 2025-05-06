@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import formStyles from "./UserSignup.module.css";
 import { AddUser, AuthUser, AuthUserWithToken } from "api/AuthAPI";
+import { useTaskManagerContext } from "Context/TaskManagerContext";
 
 interface FormValues {
   username: string;
@@ -12,6 +13,7 @@ interface FormValues {
 }
 
 export const UserAuth: React.FC = () => {
+  const {setIsAuthenticated} = useTaskManagerContext()
   const navigate = useNavigate();
   const {
     register,
@@ -30,21 +32,25 @@ export const UserAuth: React.FC = () => {
 
   useEffect(() => {
     async function getUser() {
-        if (localStorage.getItem("token")) {
-            try {
-                await AuthUserWithToken(localStorage.getItem('token'))
-                navigate("/dashboard") 
-            } catch (error) {
-                throw error
-            }
-            
-            
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const res = await AuthUserWithToken(token);
+          if (res) {
+            setIsAuthenticated(true); // If token is valid, authenticate the user
+            navigate('/dashboard')
+          } else {
+            setIsAuthenticated(false); // If token is invalid, ensure the user is not authenticated
+          }
+        } catch (error) {
+          console.error("Error during token validation", error);
+          setIsAuthenticated(false); // In case of error, set as not authenticated
         }
+      }
     }
 
     getUser();
-    
-  }, [localStorage.getItem('token')]);
+  }, [setIsAuthenticated]);
   return (
     <>
       <Modal
@@ -64,7 +70,7 @@ export const UserAuth: React.FC = () => {
             />
             <label>Password</label>
             <input
-              {...register("password", { required: "Password is required" })}
+              {...register("password", { required: "Password is required" })} type="password"
             />
           </div>
         </form>

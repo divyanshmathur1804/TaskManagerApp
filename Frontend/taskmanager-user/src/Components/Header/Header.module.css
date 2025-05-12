@@ -1,0 +1,17 @@
+.header{
+    width: 80%;
+    background-color: white;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 20%;
+    height: 3.3rem;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.header h3{
+    padding: 1rem;
+}

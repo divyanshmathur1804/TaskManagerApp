@@ -1,8 +1,10 @@
 import { createContext, useContext } from "react";
 
 export interface AppContextType {
-    isAuthenticated: boolean;
-    setIsAuthenticated: (value: boolean) => void;
+  isAuthenticated: boolean;
+  setIsAuthenticated: (value: boolean) => void;
+  loading: boolean;
+  setLoading: (value: boolean) => void;
     // Add more shared state here as needed
   }
 

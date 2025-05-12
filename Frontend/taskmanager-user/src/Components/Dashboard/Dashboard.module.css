@@ -4,7 +4,7 @@
 }
 
 .sideContainer{
-    position: absolute; /* or fixed depending on use case */
+    position: fixed; /* or fixed depending on use case */
     top: 0;
     left: 0;
     height: 100vh;
@@ -20,11 +20,13 @@
 .DashboardContainer{
     position: absolute;
     left: 20%;
-    top: 0;
+    top: 3rem;
     width: 80%;
     display: flex;
     height: 100vh;
     flex-direction: column;
+    background-color: rgb(245, 245, 245);
+
 }
 .DashboardCardContainer{
     display: flex;
@@ -93,6 +95,8 @@
     width: 100%;
 }
 .InnerProjectContainerLink{
+    all: unset;
+    cursor: pointer;
     display: flex;
     width: 100%;
     justify-content: center;

@@ -1,0 +1,53 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    height: 70%;
+    background-color: white; /* or your background */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* black shadow */
+}
+.projectBar{
+    display: flex;
+    flex-direction: row;
+}
+.projectBarTextContainer{
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    justify-content: flex-start;
+    text-align: left;
+    
+}
+.projectBarTextContainer h1{
+    margin: 0px;
+    margin-bottom: 2px;
+    color: #0795FE;
+}
+.projectBarTextContainer p{
+    margin-top: 3px;
+    margin-bottom: 0px;
+}
+.projectBarbtnContainer{
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
+    align-items: center;
+    color: #0795FE;
+    gap: 30px;
+    padding: 1rem;
+}
+.projectBarbtnContainer button{
+    all: unset;
+    background-color: #0795FE;
+    color: white;
+    padding: 10px;
+    border-radius: 7px;
+    font-weight: 500;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.projectBarbtnContainer h3{
+    margin-bottom: 0px;
+}

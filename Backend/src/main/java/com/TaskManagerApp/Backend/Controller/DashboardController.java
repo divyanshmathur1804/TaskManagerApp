@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.TaskManagerApp.Backend.Entities.AddProjectToTeam;
 import com.TaskManagerApp.Backend.Entities.AddTeamMemberRequest;
 import com.TaskManagerApp.Backend.Entities.Project;
+import com.TaskManagerApp.Backend.Entities.Task;
 import com.TaskManagerApp.Backend.Entities.Teams;
 import com.TaskManagerApp.Backend.Entities.User;
 import com.TaskManagerApp.Backend.Security.JWTUtils;
 import com.TaskManagerApp.Backend.Services.ProjectService;
+import com.TaskManagerApp.Backend.Services.TaskService;
 import com.TaskManagerApp.Backend.Services.TeamService;
 import com.TaskManagerApp.Backend.Services.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,12 +36,14 @@ public class DashboardController {
     ProjectService projectService;
     TeamService teamService;
     JWTUtils jwtUtils;
+    TaskService taskService;
 
-    public DashboardController(UserService userService, ProjectService projectService, TeamService teamService,JWTUtils jwtUtils){
+    public DashboardController(UserService userService, ProjectService projectService, TeamService teamService,JWTUtils jwtUtils,TaskService taskService){
         this.userService = userService;
         this.projectService = projectService;
         this.teamService = teamService;
         this.jwtUtils = jwtUtils;
+        this.taskService = taskService;
     }
 
     @GetMapping("/dashboard")
@@ -103,6 +107,25 @@ public class DashboardController {
 
         return ans;
     }
+
+    @GetMapping("/getProject")
+    public Project fetchProject(@RequestParam String id) {
+        return projectService.findProjectbyId(id).orElseThrow();
+    }
+
+    @GetMapping("/getProjectTeam")
+    public Teams fetchProjectTeam(@RequestParam String id) {
+        return teamService.findTeamById(id);
+    }
+
+    @PostMapping("/addNewTask")
+    public Task addNewTask(@RequestBody Task task , @RequestParam String projectId ) {
+        return taskService.AddTask(projectId, task);
+        
+        
+    }
+    
+    
     
     
     

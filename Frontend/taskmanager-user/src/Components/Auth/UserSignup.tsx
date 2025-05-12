@@ -54,7 +54,7 @@ export const UserSignup: React.FC = () => {
             <input {...register("email", { required: "Email is required" })} />
             <label>Password</label>
             <input
-              {...register("password", { required: "Password is required" })}
+              {...register("password", { required: "Password is required" })} type="password"
             />
           </div>
         </form>

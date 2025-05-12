@@ -1,3 +1,4 @@
+import { data } from "react-router-dom";
 import api from "./http.api";
 
 
@@ -22,3 +23,17 @@ export const AddNewProjectAPI = async (data: any): Promise<ProjectDTO | null> =>
         throw error;
     }
 };
+
+export const fetchIndividualProject = async (id: string):Promise<ProjectDTO | null> => {
+    try {
+        const response = await api.get('/api/v1/users/getProject', {
+            params: { id: id }, // sending as query param ?id=projectId
+            headers: {
+              Authorization: `Bearer ${Token}`,
+            },
+          });
+          return response.data
+    } catch (error) {
+        throw error
+    }
+}

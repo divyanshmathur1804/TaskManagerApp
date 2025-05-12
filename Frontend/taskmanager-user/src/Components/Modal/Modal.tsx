@@ -18,10 +18,8 @@ export const Modal: React.FC<ModalProps> = ({ size = 'large', children, ...props
           centered={true}
           styles={{
             content: {
-              height: '400px',
+              height: '500px',
               maxHeight: 'calc(100vh - 74px)',
-              overflowX: 'hidden',
-              overflowY: 'auto',
             },
           }}
           // style={{ right: 0, top: 0, position: 'fixed' }}

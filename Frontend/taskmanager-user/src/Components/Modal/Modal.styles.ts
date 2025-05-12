@@ -52,6 +52,7 @@ export const Modal = styled(AntModal)`
 
   .ant-modal-body {
     padding: 0px;
+    height: 80%;
   }
 
   .ant-form.ant-form-vertical {

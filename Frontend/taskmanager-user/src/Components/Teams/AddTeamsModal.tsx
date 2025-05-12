@@ -28,6 +28,7 @@ interface FormValues {
     projectIds: string[] | null;
     userIds: string[] | null;
   }
+  const TeamMember: UserDTO[] = [];
 export const AddTeamsModal: React.FC<ModalValues> = ({closeModal}) => {
     const {
         register,
@@ -39,7 +40,7 @@ export const AddTeamsModal: React.FC<ModalValues> = ({closeModal}) => {
       const [searchTerm, setSearchTerm] = useState("");
       const [users, setUsers] = useState<UserDTO | null>(null);
       
-      const TeamMember: UserDTO[] = [];
+      
        
     
       async function onSubmit(data: FormValues){

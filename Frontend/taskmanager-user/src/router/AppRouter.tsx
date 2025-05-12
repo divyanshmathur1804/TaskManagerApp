@@ -5,6 +5,7 @@ import {UserSignup} from '../Components/Auth/UserSignup'
 import { UserDashboard } from "Components/Dashboard/User-Dashboard"
 import ProtectedRoute from "Components/Auth/ProtectedRoute"
 import { AddTeams } from "Components/Teams/AddTeams"
+import { Layout } from "Components/Layout/Layout"
 
 export const AppRouter: React.FC = () =>{
     return(
@@ -14,9 +15,11 @@ export const AppRouter: React.FC = () =>{
             <Route path="login" element = {<UserAuth/>} />
             <Route path="Signup" element = {<UserSignup/>}/>
             <Route element = {<ProtectedRoute/>}>
-             <Route path="dashboard" element= {<UserDashboard/>}/>
+            <Route element = {<Layout/>}>
+            <Route path="dashboard" element= {<UserDashboard/>}/>
              <Route path="teams" element = {<AddTeams/>}/>
-             </Route>
+            </Route>
+            </Route>
         </Routes>
         </BrowserRouter>
     )

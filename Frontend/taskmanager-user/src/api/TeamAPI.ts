@@ -57,3 +57,16 @@ export const AddProjectToTeam = async (data: any): Promise<number | null> => {
         throw error;
     }
 };
+export const fetchProjectTeam = async (id: String | null): Promise<TeamDTO | null> => {
+    try {
+        const response = await api.get('/api/v1/users/getProjectTeam',{
+            params: {id: id},
+            headers: {
+                Authorization: `Bearer ${Token}`,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};

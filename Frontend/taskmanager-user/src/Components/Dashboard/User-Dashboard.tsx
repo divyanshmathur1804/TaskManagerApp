@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { PendingCard } from "./PendingCard";
 import { fetchProjects } from "api/UserAPI";
 import taskImage from '../../assets/logo/taskManagerIcon.svg'
+import { IndividualProjectPage } from "Components/Projects/IndividualProjectPage";
 
 
 interface ProjectDTO{
@@ -16,7 +17,12 @@ interface ProjectDTO{
 export const UserDashboard: React.FC = () => {
     const [addProject, setAddProject] = useState<Boolean>(false)
     const [projects, setProjects] = useState<ProjectDTO[] | null>([])
+    const [selectedProject, setSelectedProject] = useState<string | null>(null)
+
+    const URL: any = new URLSearchParams(window.location.search)
+
     function handleAddProject(){
+        URL.set('project', selectedProject)
         setAddProject(true);
     }
 
@@ -29,6 +35,11 @@ export const UserDashboard: React.FC = () => {
         }
         fetchAllProjects();
     },[])
+
+    function handleProjectClick(value: string){
+        setSelectedProject(value)
+
+    }
     return(
         <>
         <div className={`${DashboardStyles.mainContainer}`}>
@@ -41,7 +52,8 @@ export const UserDashboard: React.FC = () => {
                     <div className={`${DashboardStyles.InnerProjectContainer}`}> 
                     <ul>
                     {projects.map((project) => (
-                        <li><Link to={'/project'} className={`${DashboardStyles.InnerProjectContainerLink}`}>{project.name}</Link></li>
+                        <li><button className={`${DashboardStyles.InnerProjectContainerLink}`}
+                        onClick={() => handleProjectClick(project.id)}>{project.name}</button></li>
                     ))}    
                     </ul>
                     </div>}
@@ -67,10 +79,11 @@ export const UserDashboard: React.FC = () => {
                     </div>
                     
                 </div>
-                <div className={`${DashboardStyles.DashboardAddBtnContainer}`}>
+                {selectedProject != null ? <IndividualProjectPage id={selectedProject}/> :<div className={`${DashboardStyles.DashboardAddBtnContainer}`}>
                     <p>Select a Project to Start or ,</p>
                     <button onClick={handleAddProject}> + Add Project</button>
-                </div>
+                </div>}
+                
 
             </div>
             {addProject && <AddNewProject closeModal={() => setAddProject(false)} />}

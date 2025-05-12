@@ -1,5 +1,7 @@
 package com.TaskManagerApp.Backend.Entities;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,6 +15,7 @@ public class Project {
     private String name;
     private String description;
     private String teamId;
+    private List<String> taskId;
     public Project(String id, String name, String description, String teamId) {
         this.id = id;
         this.name = name;
@@ -50,6 +53,11 @@ public class Project {
                 return false;
         } else if (!teamId.equals(other.teamId))
             return false;
+        if (taskId == null) {
+            if (other.taskId != null)
+                return false;
+        } else if (!taskId.equals(other.taskId))
+            return false;
         return true;
     }
     @Override
@@ -60,6 +68,7 @@ public class Project {
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((description == null) ? 0 : description.hashCode());
         result = prime * result + ((teamId == null) ? 0 : teamId.hashCode());
+        result = prime * result + ((taskId == null) ? 0 : taskId.hashCode());
         return result;
     }
 

@@ -58,12 +58,6 @@ public class TeamService {
             
         }
         
-
-        
-
-        
-    
-
     public void addProjecttoTeam(String ProjectId, String TeamId){
         Teams team = teamRepository.findById(TeamId).orElseThrow();
         Project project = projectRepository.findById(ProjectId).orElseThrow();
@@ -81,5 +75,9 @@ public class TeamService {
             project.setTeamId(TeamId);
             projectRepository.save(project);
         }
+    }
+
+    public Teams findTeamById(String id){
+        return teamRepository.findById(id).orElseThrow();
     }
 }

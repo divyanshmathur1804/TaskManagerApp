@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import headerStyles from './Header.module.css'
 import { fetchIndividualUser } from "api/UserAPI";
+import Avatar from "antd/es/avatar/Avatar";
+import UserAvatar from "Common/Avatar";
 
 interface UserDTO {
     id: number;
@@ -20,8 +22,24 @@ export const Header: React.FC = () => {
         fetchUser()
     },[])
     return(
+        <>
         <header className={`${headerStyles.header}`}>
-      <h3>{user?.firstName} {user?.lastName}</h3>
+            <div>
+                {user &&
+            
+            <UserAvatar name={user.firstName}/>
+            
+            }
+
+            </div>
+            <div>
+        
+            <h3>{user?.firstName} {user?.lastName}</h3>
+            
+            </div>
+            
+      
     </header>
+    </>
     )
 }

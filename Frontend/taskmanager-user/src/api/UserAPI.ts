@@ -70,3 +70,15 @@ export const findUsers = async (ids: string[] | null): Promise<UserDTO[]> => {
     throw error;
   }
 };
+
+export const fetchIndividualUserById = async (Id : string): Promise<UserDTO | null> => {
+  try {
+    const response = await api.get('/api/v1/users/getUserById', {
+      params : {Id : Id},
+      headers: getAuthHeader(),
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

@@ -19,6 +19,7 @@ public class Task {
     private String code;
     private String projectId;
     private List<String> userId;
+    private String status;
     
     public Task() {
     
@@ -79,6 +80,11 @@ public class Task {
                 return false;
         } else if (!userId.equals(other.userId))
             return false;
+        if (status == null) {
+            if (other.status != null)
+                return false;
+        } else if (!status.equals(other.status))
+            return false;
         return true;
     }
 
@@ -93,6 +99,7 @@ public class Task {
         result = prime * result + ((code == null) ? 0 : code.hashCode());
         result = prime * result + ((projectId == null) ? 0 : projectId.hashCode());
         result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+        result = prime * result + ((status == null) ? 0 : status.hashCode());
         return result;
     }
 

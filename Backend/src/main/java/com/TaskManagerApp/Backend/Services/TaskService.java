@@ -21,6 +21,9 @@ public class TaskService {
     }
 
     public Task AddTask(String projectId, Task task){
+        if (task.getStatus() == null) {
+            task.setStatus("todo");
+        }
         Task NewTask = taskRepository.save(task);
         Project project = projectRepository.findById(projectId).orElseThrow();
         if (project.getTaskId() == null) {

@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import PageStyles from './IndividualProject.module.css'
 import { fetchProjectTeam } from "api/TeamAPI";
 import { AddTaskModal } from "Components/Task/AddTaskModal";
+import { TaskCard } from "Components/Task/TaskCard";
+import { findUsers } from "api/UserAPI";
+import UserAvatar from "Common/Avatar";
 
 interface ProjectProp{
     id : string
@@ -19,11 +22,18 @@ interface ProjectDTO{
     projectIds: string[] | null;
     userIds: string[] | null;
   }
+  interface UserDTO {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
 
 export const IndividualProjectPage: React.FC<ProjectProp> = ({id}) => {
     const [project, setProject] = useState<ProjectDTO | null>(null)
     const [team, setTeam] = useState<TeamDTO | null>(null)
     const [clicked, setIsClicked] = useState<boolean>(false)
+    const [members, setMembers] = useState<UserDTO[] | null>(null)
 
     function handleClick(){
       setIsClicked(true)
@@ -40,7 +50,6 @@ export const IndividualProjectPage: React.FC<ProjectProp> = ({id}) => {
     useEffect(() => {
        async function fetchProject(){
             const response : ProjectDTO | null = await fetchIndividualProject(id)
-            console.log(response)
         if (response) {
             setProject(response)
         }
@@ -71,6 +80,27 @@ export const IndividualProjectPage: React.FC<ProjectProp> = ({id}) => {
      
  
      },[project])
+
+     useEffect(() => {
+      const fetchUsers = async () => {
+        if (!team?.userIds) return;
+    
+        try {
+          const response: UserDTO[] | null = await findUsers(team?.userIds);
+    
+          if (response) {
+            setMembers(response)
+          }
+        } catch (error) {
+          console.error('Error fetching team:', error);
+        }
+      };
+    
+      if (team) {
+        fetchUsers();
+      }
+     
+     },[team])
   return (
     <>
     <div className={`${PageStyles.mainContainer}`}>
@@ -80,11 +110,20 @@ export const IndividualProjectPage: React.FC<ProjectProp> = ({id}) => {
       <p>This is the individual project page.</p>
       </div>
       <div className={`${PageStyles.projectBarbtnContainer}`}>
-      <h3>Team: {team?.name} </h3>
+      <div style={{width : 'auto', display: 'flex', alignItems: 'center', gap: '-8px',marginTop: '20px'}}>
+      {members && members.map((member) => (
+        <UserAvatar name={member.firstName}/>
+      ))} 
+      </div>
+      <div>
       <button onClick={handleClick} >+ Create Task</button>
       </div>
       </div>
+      </div>
       <hr style={{ border: '1px solid #FFB726', margin: '0.5rem 0' }} />
+      <div className={`${PageStyles.TaskCardContainer}`}>
+      {project && <TaskCard projectId={project.id}/> }  
+      </div>
 
       {clicked && <AddTaskModal closeModal={handleCloseModal} team = {team} projectId={project?.id}/>}
 

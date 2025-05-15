@@ -30,7 +30,7 @@
 }
 .DashboardCardContainer{
     display: flex;
-    height: 30%;
+    min-height: 30%;
     align-items: center;
     background-color: #FFB726;
     margin: 10px;

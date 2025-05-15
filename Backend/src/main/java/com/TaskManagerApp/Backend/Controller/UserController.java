@@ -87,6 +87,12 @@ public class UserController {
     public List<User> fetchUserList(@RequestParam List<String> id) {
         return userService.findUsersById(id);
     }
+
+    @GetMapping("/getUserById")
+    public User fetchUserbyId(@RequestParam String Id) {
+        return userService.findById(Id).orElseThrow();
+    }
+    
     
     
     

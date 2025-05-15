@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.TaskManagerApp.Backend.Entities.Project;
+import com.TaskManagerApp.Backend.Entities.Task;
 import com.TaskManagerApp.Backend.Entities.Teams;
 import com.TaskManagerApp.Backend.Repositories.ProjectRepository;
 import com.TaskManagerApp.Backend.Repositories.TeamRepository;
@@ -48,5 +49,13 @@ public class ProjectService  {
             project.setTeamId(teamId);
             projectRepository.save(project);
         }
+    }
+
+    public List<String> findTasks(String projectId){
+        Project project = projectRepository.findById(projectId).orElseThrow();
+        List<String> taskId = project.getTaskId();
+
+        return taskId;
+
     }
 }

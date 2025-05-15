@@ -124,6 +124,16 @@ public class DashboardController {
         
         
     }
+
+    @GetMapping("/fetchTasks")
+    public List<Task> fetchTasks(@RequestParam String projectId) {
+        if (projectService.findTasks(projectId) == null) {
+            return new ArrayList<>();
+        }
+        List<String> taskId = projectService.findTasks(projectId);
+        return taskService.getTaskById(taskId);
+    }
+    
     
     
     

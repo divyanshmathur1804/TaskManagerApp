@@ -22,7 +22,6 @@ export const PendingCard: React.FC = () => {
         useEffect(() => {
                 async function fetchMyTeams(){
                     const res = await fetchTeams()
-                    console.log(res)
                     if (res) {
                         setTeamsCount(res.length)
                     }

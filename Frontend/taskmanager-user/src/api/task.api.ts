@@ -1,7 +1,7 @@
 import api from "./http.api";
 
 interface TaskDTO {
-    id:number;
+    id:string;
     taskName:string;
     taskDesc:string;
     priority:string;
@@ -45,4 +45,18 @@ export const fetchAllTasks = async (projectId:string|undefined): Promise<TaskDTO
     }
     
     
-} 
+}
+
+export const UpdateTaskStatus = async (taskId: string , status: string): Promise<TaskDTO | null> => {
+    try {
+        const response = await api.post('/api/v1/users/TaskStatus',status,{
+            params : {taskId : taskId },
+            headers: getAuthHeader(),
+    
+        })
+        return response.data
+        
+    } catch (error) {
+        throw error
+    }
+}

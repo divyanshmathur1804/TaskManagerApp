@@ -22,18 +22,23 @@ interface ProjectDTO{
     projectIds: string[] | null;
     userIds: string[] | null;
   }
-  interface UserDTO {
+  interface UserProfileDTO {
   id: number;
   firstName: string;
   lastName: string;
   email: string;
+  profileImageURL: string
+  headerImageURL: string
+  jobTitle : string
+  department: string
+  location: string
 }
 
 export const IndividualProjectPage: React.FC<ProjectProp> = ({id}) => {
     const [project, setProject] = useState<ProjectDTO | null>(null)
     const [team, setTeam] = useState<TeamDTO | null>(null)
     const [clicked, setIsClicked] = useState<boolean>(false)
-    const [members, setMembers] = useState<UserDTO[] | null>(null)
+    const [members, setMembers] = useState<UserProfileDTO[] | null>(null)
 
     function handleClick(){
       setIsClicked(true)
@@ -86,7 +91,7 @@ export const IndividualProjectPage: React.FC<ProjectProp> = ({id}) => {
         if (!team?.userIds) return;
     
         try {
-          const response: UserDTO[] | null = await findUsers(team?.userIds);
+          const response: UserProfileDTO[] | null = await findUsers(team?.userIds);
     
           if (response) {
             setMembers(response)
@@ -112,7 +117,8 @@ export const IndividualProjectPage: React.FC<ProjectProp> = ({id}) => {
       <div className={`${PageStyles.projectBarbtnContainer}`}>
       <div style={{width : 'auto', display: 'flex', alignItems: 'center', gap: '-8px',marginTop: '20px'}}>
       {members && members.map((member) => (
-        <UserAvatar name={member.firstName}/>
+        
+        member.profileImageURL ? <img src={member.profileImageURL} style={{width: '40px', height: '40px', borderRadius: '50%'}}/> :<UserAvatar name={member.firstName}/>
       ))} 
       </div>
       <div>

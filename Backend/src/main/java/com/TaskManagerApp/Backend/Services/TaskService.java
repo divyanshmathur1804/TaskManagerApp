@@ -50,4 +50,10 @@ public class TaskService {
         return taskRepository.findAllById(TaskId);
 
     }
+
+    public Task updateTaskStatus(String taskId, String Status){
+        Task task = taskRepository.findById(taskId).orElseThrow();
+        task.setStatus(Status);
+        return taskRepository.save(task); 
+    }
 }

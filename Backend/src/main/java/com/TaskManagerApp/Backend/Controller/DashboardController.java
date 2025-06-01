@@ -59,14 +59,15 @@ public class DashboardController {
     }
 
     @PostMapping("/team")
-    public ResponseEntity<Teams> postMethodName(@RequestBody Teams teams) {
-        return ResponseEntity.ok(teamService.addTeam(teams));
-        
-        
-    }
+public ResponseEntity<Teams> createTeam(@RequestBody Teams teams) {
+    
+    return ResponseEntity.ok(teamService.addTeam(teams));
+}
+
 
     @PostMapping("/addMember")
     public Teams addTeamMember(@RequestBody AddTeamMemberRequest request ) {
+        
         return teamService.addUsertoTeam(request.getUserId(), request.getTeamId());
     }
 
@@ -133,6 +134,14 @@ public class DashboardController {
         List<String> taskId = projectService.findTasks(projectId);
         return taskService.getTaskById(taskId);
     }
+
+    @PostMapping("/TaskStatus")
+    public Task SetTaskStatus(@RequestBody String Status, @RequestParam String taskId) {
+        
+        
+        return taskService.updateTaskStatus(taskId, Status);
+    }
+    
     
     
     

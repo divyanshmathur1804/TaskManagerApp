@@ -3,6 +3,7 @@ package com.TaskManagerApp.Backend.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.TaskManagerApp.Backend.DTO.UserDTO;
 import com.TaskManagerApp.Backend.Entities.LoginDetails;
 import com.TaskManagerApp.Backend.Entities.User;
 import com.TaskManagerApp.Backend.Repositories.UserRepository;
@@ -25,6 +26,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.http.HttpHeaders;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 @RestController
@@ -92,6 +96,81 @@ public class UserController {
     public User fetchUserbyId(@RequestParam String Id) {
         return userService.findById(Id).orElseThrow();
     }
+
+    @PostMapping("/updateUserProfile")
+    public User UpdateProfile(@RequestBody String URL, @RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader) {
+
+        try {
+        String token = (authHeader != null && authHeader.startsWith("Bearer "))
+                ? authHeader.substring(7).trim()
+                : authHeader.trim();
+
+        String email = jwtUtils.getEmailFromToken(token);
+        User user = userService.findUserByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found for email: " + email));
+
+        return userService.updateUserProfle(URL, user.getId());
+
+        
+    } catch (Exception e) {
+        throw e;
+    }
+    }
+
+    @GetMapping("/getUserWithProfile")
+    public User fetchUserWithProfile( @RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader) {
+        String token = (authHeader != null && authHeader.startsWith("Bearer "))
+                ? authHeader.substring(7).trim()
+                : authHeader.trim();
+
+        String email = jwtUtils.getEmailFromToken(token);
+        User user = userService.findUserByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found for email: " + email));
+
+        return user;
+    }
+
+    @PostMapping("/updateUserHeader")
+    public User setUserHeader(@RequestBody String URL, @RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader) {
+        //TODO: process POST request
+        try {
+        String token = (authHeader != null && authHeader.startsWith("Bearer "))
+                ? authHeader.substring(7).trim()
+                : authHeader.trim();
+
+        String email = jwtUtils.getEmailFromToken(token);
+        User user = userService.findUserByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found for email: " + email));
+
+        return userService.updateUserHeader(URL, user.getId());
+
+        
+    } catch (Exception e) {
+        throw e;
+    }
+        
+    }
+
+    @PutMapping("/updateUser")
+    public UserDTO updateUser(@RequestBody UserDTO entity,@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader ) {
+        try {
+        String token = (authHeader != null && authHeader.startsWith("Bearer "))
+                ? authHeader.substring(7).trim()
+                : authHeader.trim();
+
+        String email = jwtUtils.getEmailFromToken(token);
+        User user = userService.findUserByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found for email: " + email));
+
+                return userService.updateUser(entity, user.getId());
+    } catch (Exception e) {
+        throw e;
+    }
+    }
+    
+    
+    
+    
     
     
     

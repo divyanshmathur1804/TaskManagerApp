@@ -29,9 +29,12 @@ public class TeamService {
 
     }
 
-    public List<Teams> findById(List<String> id){
-        return teamRepository.findAllById(id);
+    public List<Teams> findById(List<String> ids) {
+    if (ids == null || ids.isEmpty()) {
+        return new ArrayList<>();
     }
+    return teamRepository.findAllById(ids);
+}
 
     public Teams addUsertoTeam(String UserId, String TeamId){
         Teams team = teamRepository.findById(TeamId).orElseThrow();

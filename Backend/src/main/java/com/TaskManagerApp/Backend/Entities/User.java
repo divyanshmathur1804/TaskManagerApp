@@ -21,6 +21,11 @@ public class User {
     private String email;
     private String password;
     private List<String> teamIds;
+    private String profileImageURL;
+    private String headerImageURL;
+    private String jobTitle;
+    private String department;
+    private String location;
 
     public User() {}
 

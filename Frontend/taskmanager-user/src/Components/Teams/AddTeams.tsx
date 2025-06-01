@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import DashboardStyles from '../Dashboard/Dashboard.module.css'
+import teamPageStyles from './teamPageStyles.module.css'
 import { AddTeamsModal } from "./AddTeamsModal";
 import { fetchTeams } from "api/TeamAPI";
 interface TeamDTO {
@@ -29,33 +29,35 @@ export const AddTeams: React.FC = () => {
 
         fetchMyTeams()
     },[])
+
+    function handleTeamClick(Id: string){
+
+    }
     return(
         <>
-        <div className={`${DashboardStyles.mainContainer}`}>
-            <div className={`${DashboardStyles.sideContainer}`}>
-                <div className={`${DashboardStyles.WorkSpaceTitle}`}>
+        <div className={`${teamPageStyles.mainContainer}`}>
+            <div className={`${teamPageStyles.sideContainer}`}>
+                <div className={`${teamPageStyles.WorkSpaceTitle}`}>
                     <p>Your Teams</p>
                     <hr/>
+                    <div className={`${teamPageStyles.ProjectContainer}`}>
+                    
                     {teams && 
+                    <div className={`${teamPageStyles.InnerProjectContainer}`}> 
                     <ul>
-                        {teams.map((team)=>(
-                            <li>
-                                {team.name}
-                            </li>
-
-                        )
-                            
-
-                        )}
-                        </ul>}
+                    {teams.map((team) => (
+                        <li><button className={`${teamPageStyles.InnerProjectContainerLink}`}
+                        onClick={() => handleTeamClick(team.id)}>{team.name}</button></li>
+                    ))}    
+                    </ul>
+                    </div>}
+                    </div>
                 </div>
 
             </div>
-            <div className={`${DashboardStyles.DashboardContainer}`}>
-                <div className={`${DashboardStyles.DashboardCardContainer}`}>
-                    pending card
-                </div>
-                <div className={`${DashboardStyles.DashboardAddBtnContainer}`}>
+            <div className={`${teamPageStyles.DashboardContainer}`}>
+                
+                <div className={`${teamPageStyles.DashboardAddBtnContainer}`}>
                     <button onClick={handleClick}>Add Team</button>
                 </div>
 

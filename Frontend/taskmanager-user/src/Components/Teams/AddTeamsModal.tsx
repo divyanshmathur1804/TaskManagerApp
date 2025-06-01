@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import formStyles from "../Auth/UserSignup.module.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import { AddNewProjectAPI } from "api/ProjectAPI";
-import { findUserByEmail } from "api/UserAPI";
+import { fetchIndividualUser, findUserByEmail } from "api/UserAPI";
 import { Button } from "antd";
 import { AddNewTeam, AddTeamMember } from "api/TeamAPI";
 
@@ -18,9 +18,10 @@ interface FormValues {
     closeModal : () => void
   }
   interface UserDTO {
-    id: number;
-    firstName: string;
-    email: string;
+     id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
   }
   interface TeamDTO {
     id: string;
@@ -39,6 +40,7 @@ export const AddTeamsModal: React.FC<ModalValues> = ({closeModal}) => {
       
       const [searchTerm, setSearchTerm] = useState("");
       const [users, setUsers] = useState<UserDTO | null>(null);
+      const [admin, setAdmin] = useState<UserDTO | null>(null);
       
       
        
@@ -46,7 +48,6 @@ export const AddTeamsModal: React.FC<ModalValues> = ({closeModal}) => {
       async function onSubmit(data: FormValues){
         try {
           const res: TeamDTO | null = await AddNewTeam(data)
-          console.log(res)
 
           if(res){
             for (const user of TeamMember) {
@@ -99,6 +100,20 @@ export const AddTeamsModal: React.FC<ModalValues> = ({closeModal}) => {
         console.error("Error fetching users:", error);
       }
     };
+
+    useEffect(() => {
+      async function fetchCurrentUser() {
+        const res: UserDTO | null = await fetchIndividualUser();
+      if (res) {
+        TeamMember.push(res)
+      } 
+        
+      }
+
+      fetchCurrentUser()
+      
+
+    },[])
 
 
     return (

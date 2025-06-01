@@ -1,0 +1,32 @@
+.mainContainer{
+    margin: 4px;
+    margin-bottom: 40px;
+}
+
+.formLabel{
+    font-weight: 500;
+}
+
+.formInput{
+    font-size: 16px;
+    background: transparent;
+    color: #B6C2CF;
+    border: 1px solid #579DFF;
+    padding: 8px;
+}
+
+.formInput:focus {
+  border-color: #85bfff;
+  outline: none; /* Optional: remove blue glow */
+  border-radius: 3px;
+}
+
+.formSpan{
+    padding: 12px;
+    border-radius: 3px;
+}
+
+.formSpan:hover{
+    
+    background-color: #303234;
+}

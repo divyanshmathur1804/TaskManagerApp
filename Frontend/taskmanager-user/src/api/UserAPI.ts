@@ -83,7 +83,7 @@ export const findUsers = async (ids: string[] | null): Promise<UserProfileDTO[]>
   }
 };
 
-export const fetchIndividualUserById = async (Id : string): Promise<UserDTO | null> => {
+export const fetchIndividualUserById = async (Id : string): Promise<UserProfileDTO | null> => {
   try {
     const response = await api.get('/api/v1/users/getUserById', {
       params : {Id : Id},

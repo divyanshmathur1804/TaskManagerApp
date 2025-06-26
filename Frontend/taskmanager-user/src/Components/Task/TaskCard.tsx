@@ -30,10 +30,15 @@ interface PropValue {
 }
 
 interface UserDTO {
-  id: number;
+ id: number;
   firstName: string;
   lastName: string;
   email: string;
+  profileImageURL: string
+  headerImageURL: string
+  jobTitle : string
+  department: string
+  location: string
 }
 
 export const TaskCard: React.FC<PropValue> = ({ projectId }) => {
@@ -145,7 +150,7 @@ const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
             >
               <LeftOutlined />
             </button>
-            <Link to={'/'} className={taskCardStyles.Link}>
+            <Link to={`/task/${task.id}`} className={taskCardStyles.Link}>
 
             <div className={taskCardStyles.TodoInnerCardContainer}>
               {task.priority && (
@@ -164,7 +169,7 @@ const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
                 <div className={taskCardStyles.UserContainer}>
                   <div className={taskCardStyles.UserContainerAvatar}>
                     {taskUsers[task.id]?.map(user => (
-                      <UserAvatar key={user.id} name={user.firstName} />
+                     user.profileImageURL ? <img src= {user.profileImageURL} width={40} height={40} style={{borderRadius: '50%'}} /> : <UserAvatar key={user.id} name={user.firstName} />
                     )) || <p>Loading users...</p>}
                   </div>
                 </div>

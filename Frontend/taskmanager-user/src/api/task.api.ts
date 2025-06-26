@@ -60,3 +60,16 @@ export const UpdateTaskStatus = async (taskId: string , status: string): Promise
         throw error
     }
 }
+
+export const fetchIndividualTask = async (taskId: string):Promise<TaskDTO | null> => {
+    try {
+        const response = await api.get('/api/v1/users/task',{
+            params: {taskId : taskId},
+            headers: getAuthHeader(),
+        })
+        return response.data
+    } catch (error) {
+        throw error
+        
+    }
+} 

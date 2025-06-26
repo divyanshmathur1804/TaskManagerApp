@@ -56,4 +56,8 @@ public class TaskService {
         task.setStatus(Status);
         return taskRepository.save(task); 
     }
+
+    public Task findIndividualTask(String Id){
+        return taskRepository.findById(Id).orElseThrow();
+    }
 }

@@ -14,13 +14,10 @@ function Navbar(){
                         <h2>Task Manager App</h2>
                     </div>
                 </li>
-                <div className={`${NavbarStyle.MainContainerButtons}`}>
-                <li><Link className={`${NavbarStyle.Link}`} to={"Signup"}>Signup</Link></li>
-                <li><Link className={`${NavbarStyle.Link}`} to={"login"}>Login</Link></li>
-                </div>
+               
             </ul>
         </div>
-        <hr className={`${NavbarStyle.MainHR}`} />
+        
         </>
     )
 

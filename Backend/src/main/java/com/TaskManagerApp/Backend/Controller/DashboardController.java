@@ -141,6 +141,12 @@ public ResponseEntity<Teams> createTeam(@RequestBody Teams teams) {
         
         return taskService.updateTaskStatus(taskId, Status);
     }
+
+    @GetMapping("/task")
+    public Task fetchIndividualTask(@RequestParam String taskId) {
+        return taskService.findIndividualTask(taskId);
+    }
+    
     
     
     

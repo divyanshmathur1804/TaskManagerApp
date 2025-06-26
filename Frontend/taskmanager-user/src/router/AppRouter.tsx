@@ -7,6 +7,7 @@ import ProtectedRoute from "Components/Auth/ProtectedRoute";
 import { AddTeams } from "Components/Teams/AddTeams";
 import { Layout } from "Components/Layout/Layout";
 import { ProfileSettingsPage } from "Components/ProfileSettings/ProfileSettingsPage";
+import { TaskDetailModal } from "Components/Task/TaskDetailModal";
 
 export const AppRouter: React.FC = () => {
   return (
@@ -17,9 +18,11 @@ export const AppRouter: React.FC = () => {
         <Route path="Signup" element={<UserSignup />} />
         <Route element={<ProtectedRoute />}>
           <Route path="profile-settings" element={<ProfileSettingsPage />} />
+          <Route path="task/:id" element={<TaskDetailModal/>}/>
           <Route element={<Layout />}>
             <Route path="dashboard" element={<UserDashboard />} />
             <Route path="teams" element={<AddTeams />} />
+
           </Route>
         </Route>
       </Routes>

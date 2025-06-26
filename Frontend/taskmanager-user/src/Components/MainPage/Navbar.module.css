@@ -1,8 +1,10 @@
 .MainContainer{
     display: flex;
     flex-direction: row;
-    padding: 4px;
+    padding: 16px;
     border: 10px black;
+    padding-bottom: 0;
+    padding-top: 0;
     
 }
 .MainContainer ul {

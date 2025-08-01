@@ -19,7 +19,7 @@ public class CorsConfig {
      @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4000")); // your frontend origin
+        configuration.setAllowedOrigins(List.of("http://localhost:4000","https://stupendous-sopapillas-409627.netlify.app/")); // your frontend origin
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);

@@ -11,6 +11,7 @@ interface TeamDTO {
 export const AddTeams: React.FC = () => {
     const [isAddTeams, setIsAddTeams] = useState<boolean>(false)
     const [teams, setTeams] = useState<TeamDTO[]>([])
+    const [teamSelected, setTeamSelected] = useState<boolean>(false);
     
     
     function handleClick(){
@@ -31,6 +32,7 @@ export const AddTeams: React.FC = () => {
     },[])
 
     function handleTeamClick(Id: string){
+        setTeamSelected(true)
 
     }
     return(
@@ -55,13 +57,18 @@ export const AddTeams: React.FC = () => {
                 </div>
 
             </div>
-            <div className={`${teamPageStyles.DashboardContainer}`}>
-                
+            {teamSelected ?
+                <div className={`${teamPageStyles.DashboardContainer}`}>
+
+
+                </div>
+                :<div className={`${teamPageStyles.DashboardContainer}`}>
+
                 <div className={`${teamPageStyles.DashboardAddBtnContainer}`}>
                     <button onClick={handleClick}>Add Team</button>
                 </div>
 
-            </div>
+            </div>}
             {isAddTeams && <AddTeamsModal closeModal={() => setIsAddTeams(false)}/>}
             
         </div>

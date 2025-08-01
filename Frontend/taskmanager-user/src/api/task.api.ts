@@ -72,4 +72,32 @@ export const fetchIndividualTask = async (taskId: string):Promise<TaskDTO | null
         throw error
         
     }
-} 
+}
+
+export const UpdateTask = async (data: any): Promise<TaskDTO | null> => {
+    try {
+        const response = await api.put('/api/v1/users/updateTask',data,{
+            params : {taskId : data.taskId },
+            headers: getAuthHeader(),
+        })
+        return response.data
+
+
+    }
+    catch(error){
+        throw error
+    }
+}
+
+export const deleteTask = async (taskId: string): Promise<void> => {
+    try {
+        const response = await api.delete('/api/v1/users/deleteTask',{
+            params : {taskId : taskId},
+            headers: getAuthHeader(),
+        })
+        return response.data
+    }
+    catch(error){
+        throw error
+    }
+}

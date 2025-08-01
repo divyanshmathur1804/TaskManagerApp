@@ -8,7 +8,7 @@ export const { info: InfoModal, success: SuccessModal, warning: WarningModal, er
 interface ModalProps extends AntModalProps {
     size?: 'small' | 'medium' | 'large';
   }
-export const Modal: React.FC<ModalProps> = ({ size = 'large', children, ...props })=>{
+export const Modal: React.FC<ModalProps> = ({ size, children, ...props })=>{
     const modalSize = Object.entries(modalSizes).find((sz) => sz[0] === size)?.[1];
     return (
         <S.Modal
@@ -16,12 +16,6 @@ export const Modal: React.FC<ModalProps> = ({ size = 'large', children, ...props
           width={modalSize}
           {...props}
           centered={true}
-          styles={{
-            content: {
-              height: '500px',
-              maxHeight: 'calc(100vh - 74px)',
-            },
-          }}
           // style={{ right: 0, top: 0, position: 'fixed' }}
         >
           {children}

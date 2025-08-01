@@ -24,17 +24,6 @@ services:
     networks:
       - app-network
 
-  springboot-app:
-    build: .
-    container_name: springboot-app
-    depends_on:
-      - mongo
-    ports:
-      - "3000:3000"
-    networks:
-      - app-network
-    environment:
-      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/TaskManager
 
 volumes:
   mongo_data:

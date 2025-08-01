@@ -6,8 +6,7 @@ import java.util.Optional;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.TaskManagerApp.Backend.Entities.AddProjectToTeam;
 import com.TaskManagerApp.Backend.Entities.AddTeamMemberRequest;
@@ -20,13 +19,6 @@ import com.TaskManagerApp.Backend.Services.ProjectService;
 import com.TaskManagerApp.Backend.Services.TaskService;
 import com.TaskManagerApp.Backend.Services.TeamService;
 import com.TaskManagerApp.Backend.Services.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-
 
 
 @RestController
@@ -147,7 +139,17 @@ public ResponseEntity<Teams> createTeam(@RequestBody Teams teams) {
         return taskService.findIndividualTask(taskId);
     }
     
-    
+    @PutMapping("/updateTask")
+    public Task updateTask(@RequestBody Task task, @RequestParam String taskId) {
+        return taskService.UpdateTask(task, taskId);
+    }
+
+
+    @DeleteMapping("/deleteTask")
+    public ResponseEntity<String> deleteTask(@RequestParam String taskId) {
+        taskService.deleteTask(taskId);
+        return ResponseEntity.ok().body("Task deleted");
+    }
     
     
     

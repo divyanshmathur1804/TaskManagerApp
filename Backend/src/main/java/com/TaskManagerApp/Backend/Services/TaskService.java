@@ -60,4 +60,21 @@ public class TaskService {
     public Task findIndividualTask(String Id){
         return taskRepository.findById(Id).orElseThrow();
     }
+
+    public Task UpdateTask(Task task, String TaskId){
+        Task t = taskRepository.findById(TaskId).orElseThrow();
+        t.setTaskName(task.getTaskName());
+        t.setTaskDesc(task.getTaskDesc());
+        t.setStatus(task.getStatus());
+        t.setPriority(task.getPriority());
+
+        return taskRepository.save(t);
+
+
+    }
+
+    public void deleteTask(String TaskId){
+        Task task = taskRepository.findById(TaskId).orElseThrow();
+        taskRepository.delete(task);
+    }
 }

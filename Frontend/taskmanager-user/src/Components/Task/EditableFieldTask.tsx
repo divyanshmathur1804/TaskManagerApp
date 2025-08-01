@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
+import formStyles from './formStyles.module.css'
 
 
 interface EditableFieldProps {
   value: string;
   onSave: (value: string) => void;
+  isDesc: boolean;
 }
 
-export const EditableFieldTask: React.FC<EditableFieldProps> = ({ value, onSave}) => {
+export const EditableFieldTask: React.FC<EditableFieldProps> = ({ value, onSave, isDesc}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [currentValue, setCurrentValue] = useState(value);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -44,6 +46,7 @@ export const EditableFieldTask: React.FC<EditableFieldProps> = ({ value, onSave}
           onChange={(e) => setCurrentValue(e.target.value)}
           onBlur={handleBlur}
           onKeyDown={handleKeyDown}
+          className={isDesc ? formStyles.customInputDesc: formStyles.customInput}
           
         />
       ) : (

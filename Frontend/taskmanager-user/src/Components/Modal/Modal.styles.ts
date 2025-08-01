@@ -40,7 +40,7 @@ export const Modal = styled(AntModal)`
 
   .ant-modal-close::after {
     content: 'Close';
-    color: var(--heading-color);
+    color: black;
   }
 
   .ant-modal-header {

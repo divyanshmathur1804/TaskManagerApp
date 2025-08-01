@@ -1,0 +1,17 @@
+.priorityContainer{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.selectContainer {
+    min-width: 15%;
+}
+.descContainer{
+padding: 1rem 0 1rem 0;
+}
+
+.imageContainer {
+    display: flex;
+    padding: 2rem 0 2rem 0 ;
+}

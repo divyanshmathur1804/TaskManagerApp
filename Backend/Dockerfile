@@ -1,5 +1,4 @@
 FROM eclipse-temurin:21-jdk
 
-# Removed VOLUME /tmp (not allowed on Railway)
-COPY target/*.jar app.jar
+COPY target/Backend-0.0.1-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]

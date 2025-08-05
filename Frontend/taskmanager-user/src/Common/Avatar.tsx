@@ -15,12 +15,12 @@ function getRandomColor(name: string) {
   return COLORS[index];
 }
 
-const UserAvatar: React.FC<{ name: string }> = ({ name }) => {
+const UserAvatar: React.FC<{ name: string, style: any }> = ({ name, style }) => {
   const bgColor = useMemo(() => getRandomColor(name), [name]);
   const initial = name.charAt(0).toUpperCase();
 
   return (
-    <div style={{ ...avatarStyle, backgroundColor: bgColor }}>
+    <div style={{ ...avatarStyle,...style, backgroundColor: bgColor }}>
       {initial}
     </div>
   );

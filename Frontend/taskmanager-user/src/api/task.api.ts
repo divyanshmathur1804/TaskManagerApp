@@ -101,3 +101,15 @@ export const deleteTask = async (taskId: string): Promise<void> => {
         throw error
     }
 }
+
+export const getTaskCount = async ():Promise<number> => {
+    try {
+        const response = await api.get('/api/v1/users/getTaskCount',{
+            headers : getAuthHeader(),
+        })
+        return response.data
+    }
+    catch(error){
+        throw error
+    }
+}

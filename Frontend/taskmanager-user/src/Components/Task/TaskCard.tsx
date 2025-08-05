@@ -27,6 +27,7 @@ interface TaskDTO {
 
 interface PropValue {
   projectId: string;
+  isTaskAdded: boolean;
 }
 
 interface UserDTO {
@@ -41,7 +42,7 @@ interface UserDTO {
   location: string
 }
 
-export const TaskCard: React.FC<PropValue> = ({ projectId }) => {
+export const TaskCard: React.FC<PropValue> = ({ projectId, isTaskAdded }) => {
   const [tasks, setTasks] = useState<TaskDTO[] | null>(null);
   const [taskUsers, setTaskUsers] = useState<{ [taskId: string]: UserDTO[] }>({});
 
@@ -91,16 +92,23 @@ const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
   const {Option} = Select
 
+  async function fetchTasks() {
+    const response: TaskDTO[] | null = await fetchAllTasks(projectId);
+    if (response) {
+      setTasks(response);
+    }
+  }
   // Fetch all tasks on mount
   useEffect(() => {
-    async function fetchTasks() {
-      const response: TaskDTO[] | null = await fetchAllTasks(projectId);
-      if (response) {
-        setTasks(response);
-      }
-    }
+
     fetchTasks();
   }, [projectId]);
+
+  useEffect(() => {
+    if(isTaskAdded){
+      fetchTasks()
+    }
+  }, [isTaskAdded]);
 
   // Fetch users for each task when tasks are loaded
   useEffect(() => {
@@ -168,8 +176,10 @@ const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
                 <hr />
                 <div className={taskCardStyles.UserContainer}>
                   <div className={taskCardStyles.UserContainerAvatar}>
-                    {taskUsers[task.id]?.map(user => (
-                     user.profileImageURL ? <img src= {user.profileImageURL} width={40} height={40} style={{borderRadius: '50%'}} /> : <UserAvatar key={user.id} name={user.firstName} />
+                    {taskUsers[task.id]?.map((user, index) => (
+                     user.profileImageURL ? <img src= {user.profileImageURL} width={40} height={40} style={{borderRadius: '50%',marginLeft: index === 0 ? 0 : -12.5}} /> : <UserAvatar key={user.id} name={user.firstName} style={{
+                       marginLeft: index === 0 ? 0 : -12.5,
+                     }} />
                     )) || <p>Loading users...</p>}
                   </div>
                 </div>

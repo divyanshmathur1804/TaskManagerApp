@@ -17,6 +17,7 @@ interface ModalProps {
   closeModal: () => void;
   team: TeamDTO | null;
   projectId?: string;
+  setIsTaskAdded: (isTaskAdded: boolean) => void;
 }
 
 interface FormValues {
@@ -44,7 +45,7 @@ interface TaskDTO {
     code:string
   }
 
-export const AddTaskModal: React.FC<ModalProps> = ({ closeModal, team, projectId }) => {
+export const AddTaskModal: React.FC<ModalProps> = ({ closeModal, team, projectId, setIsTaskAdded }) => {
   const {
     register,
     control,
@@ -66,6 +67,7 @@ export const AddTaskModal: React.FC<ModalProps> = ({ closeModal, team, projectId
     try {
        const response = await addTask(data,projectId)
        if (response) {
+         setIsTaskAdded(true);
         closeModal();
        } 
     } catch (error) {

@@ -37,3 +37,21 @@ export const fetchIndividualProject = async (id: string):Promise<ProjectDTO | nu
         throw error
     }
 }
+
+export const fetchProjectList = async (ids: string[]): Promise<ProjectDTO[] | null> => {
+    try {
+        if (!ids || ids.length === 0) return [];
+
+        const queryParams = ids.map(id => `ids=${id}`).join('&');
+        const response = await api.get(`/api/v1/users/getProjectList?${queryParams}`, {
+            headers: {
+                Authorization: `Bearer ${Token}`,
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching project list:', error);
+        return null;
+    }
+};

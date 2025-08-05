@@ -3,6 +3,7 @@ package com.TaskManagerApp.Backend.Controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -101,6 +102,17 @@ public ResponseEntity<Teams> createTeam(@RequestBody Teams teams) {
         return ans;
     }
 
+    @GetMapping("/getProjectList")
+    public ResponseEntity<?> fetchProjectList(@RequestParam List<String> ids) {
+        if (ids.isEmpty()) {
+            return ResponseEntity.badRequest().body("Project IDs list is empty");
+        }
+
+        List<Project> projects = projectService.findAllById(ids);
+        return ResponseEntity.ok(projects);
+    }
+
+
     @GetMapping("/getProject")
     public Project fetchProject(@RequestParam String id) {
         return projectService.findProjectbyId(id).orElseThrow();
@@ -150,15 +162,52 @@ public ResponseEntity<Teams> createTeam(@RequestBody Teams teams) {
         taskService.deleteTask(taskId);
         return ResponseEntity.ok().body("Task deleted");
     }
-    
-    
-    
-    
-    
-    
-    
-    
 
-    
-    
+    @GetMapping("/getTaskCount")
+    public int getTaskCount(@RequestHeader(HttpHeaders.AUTHORIZATION) String auth) {
+        String token = auth.startsWith("Bearer ") ? auth.substring(7).trim() : auth.trim();
+        String email = jwtUtils.getEmailFromToken(token);
+
+        User user = userService.findUserByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // 1. Get all teams
+        List<Teams> teams = teamService.findById(user.getTeamIds());
+
+        // 2. Extract all project IDs from all teams
+        List<String> allProjectIds = teams.stream()
+                .filter(team -> team.getProjectIds() != null)
+                .flatMap(team -> team.getProjectIds().stream())
+                .distinct()
+                .collect(Collectors.toList());
+
+        // 3. Get all projects from projectService
+        List<Project> projects = projectService.findAllById(allProjectIds);
+
+        // 4. Extract all task IDs from projects
+        List<String> allTaskIds = projects.stream()
+                .filter(project -> project.getTaskId() != null)
+                .flatMap(project -> project.getTaskId().stream())
+                .distinct()
+                .collect(Collectors.toList());
+
+        // 5. Fetch all tasks
+        List<Task> tasks = taskService.getTaskById(allTaskIds);
+
+        // 6. Return count
+        return tasks.size();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

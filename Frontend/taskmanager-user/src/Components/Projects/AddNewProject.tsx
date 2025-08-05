@@ -14,6 +14,7 @@ interface FormValues {
 
 interface ModalProps {
   closeModal: () => void;
+  setIsProjectAdded: (isProjectAdded: boolean) => void;
 }
 interface TeamDTO {
   id: string;
@@ -28,7 +29,7 @@ interface ProjectDTO {
   teamId: string;
 }
 
-export const AddNewProject: React.FC<ModalProps> = ({ closeModal }) => {
+export const AddNewProject: React.FC<ModalProps> = ({ closeModal, setIsProjectAdded }) => {
   const {
     register,
     handleSubmit,
@@ -50,8 +51,9 @@ export const AddNewProject: React.FC<ModalProps> = ({ closeModal }) => {
           teamId: selected,
         };
         const response = await AddProjectToTeam(payload);
-        console.log(response);
+
         if (response) {
+          setIsProjectAdded(true);
           closeModal();
         }
       }

@@ -39,6 +39,7 @@ export const IndividualProjectPage: React.FC<ProjectProp> = ({id}) => {
     const [team, setTeam] = useState<TeamDTO | null>(null)
     const [clicked, setIsClicked] = useState<boolean>(false)
     const [members, setMembers] = useState<UserProfileDTO[] | null>(null)
+    const [isTaskAdded, setIsTaskAdded] = useState<boolean>(false);
 
     function handleClick(){
       setIsClicked(true)
@@ -118,7 +119,7 @@ export const IndividualProjectPage: React.FC<ProjectProp> = ({id}) => {
       <div style={{width : 'auto', display: 'flex', alignItems: 'center', gap: '-8px',marginTop: '20px'}}>
       {members && members.map((member) => (
         
-        member.profileImageURL ? <img src={member.profileImageURL} style={{width: '40px', height: '40px', borderRadius: '50%'}}/> :<UserAvatar name={member.firstName}/>
+        member.profileImageURL ? <img src={member.profileImageURL} style={{width: '40px', height: '40px', borderRadius: '50%'}}/> :<UserAvatar name={member.firstName} style={''}/>
       ))} 
       </div>
       <div>
@@ -128,10 +129,10 @@ export const IndividualProjectPage: React.FC<ProjectProp> = ({id}) => {
       </div>
       <hr style={{ border: '1px solid #FFB726', margin: '0.5rem 0' }} />
       <div className={`${PageStyles.TaskCardContainer}`}>
-      {project && <TaskCard projectId={project.id}/> }  
+      {project && <TaskCard projectId={project.id} isTaskAdded = {isTaskAdded}/> }
       </div>
 
-      {clicked && <AddTaskModal closeModal={handleCloseModal} team = {team} projectId={project?.id}/>}
+      {clicked && <AddTaskModal closeModal={handleCloseModal} team = {team} projectId={project?.id} setIsTaskAdded = {setIsTaskAdded}/>}
 
       
     </div>

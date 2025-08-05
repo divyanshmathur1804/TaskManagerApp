@@ -5,9 +5,11 @@ import PendingCardStyles from './PendingCard.module.css'
 import { useEffect, useState } from 'react'
 import { fetchProjects } from 'api/UserAPI'
 import { fetchTeams } from 'api/TeamAPI'
+import {getTaskCount} from "../../api/task.api";
 export const PendingCard: React.FC = () => {
     const [projectCount, setProjectCount] = useState<number>(0)
     const [TeamsCount, setTeamsCount] = useState<number>(0)
+    const [taskCount, setTaskCount] = useState<number>(0)
     
     useEffect(() => {
             async function fetchAllProjects() {
@@ -30,6 +32,15 @@ export const PendingCard: React.FC = () => {
         
                 fetchMyTeams()
             },[])
+    useEffect(() => {
+        async function fetchTaskCount(){
+            const res: any = await getTaskCount()
+            if (res){
+                setTaskCount(res)
+            }
+        }
+        fetchTaskCount()
+    }, []);
     return (
         <>
         <div className={`${PendingCardStyles.PageContainer}`}>
@@ -45,7 +56,7 @@ export const PendingCard: React.FC = () => {
             <img src={TaskImg}/>
             <div className={`${PendingCardStyles.TextContanier}`}>
                 <p>Tasks</p>
-                <h3>0</h3>
+                <h3>{taskCount}</h3>
             </div>
 
         </div>

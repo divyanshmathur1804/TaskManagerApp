@@ -18,23 +18,32 @@ export const UserDashboard: React.FC = () => {
     const [addProject, setAddProject] = useState<Boolean>(false)
     const [projects, setProjects] = useState<ProjectDTO[] | null>([])
     const [selectedProject, setSelectedProject] = useState<string | null>(null)
+    const [isprojectAdded, setIsprojectAdded] = useState<boolean>(false);
 
     const URL: any = new URLSearchParams(window.location.search)
 
     function handleAddProject(){
         URL.set('project', selectedProject)
+        setIsprojectAdded(false);
         setAddProject(true);
     }
 
-    useEffect(() => {
-        async function fetchAllProjects() {
-            const res = await fetchProjects()
-            if(res){
-                setProjects(res);
-            }
+    async function fetchAllProjects() {
+        const res = await fetchProjects()
+        if(res){
+            setProjects(res);
         }
+    }
+
+    useEffect(() => {
         fetchAllProjects();
     },[])
+
+    useEffect(() => {
+        if(isprojectAdded){
+            fetchAllProjects();
+        }
+    }, [isprojectAdded]);
 
     function handleProjectClick(value: string){
         setSelectedProject(value)
@@ -86,7 +95,7 @@ export const UserDashboard: React.FC = () => {
                 
 
             </div>
-            {addProject && <AddNewProject closeModal={() => setAddProject(false)} />}
+            {addProject && <AddNewProject closeModal={() => setAddProject(false)} setIsProjectAdded = {setIsprojectAdded} />}
         </div>
         
         </>

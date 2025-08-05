@@ -67,7 +67,7 @@ export const Header: React.FC = () => {
               gap: "0px",
             }}
           >
-            {user.profileImageURL ? <img src={user.profileImageURL} style={{width : '40px', height: '40px', borderRadius:'50%'}}/> : <UserAvatar name={user.firstName} />}
+            {user.profileImageURL ? <img src={user.profileImageURL} style={{width : '40px', height: '40px', borderRadius:'50%'}}/> : <UserAvatar name={user.firstName} style={''} />}
             
             
             <h3 style={{ margin: 0 }}>

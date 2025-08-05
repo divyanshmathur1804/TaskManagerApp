@@ -176,7 +176,7 @@ export const TaskDetailModal: React.FC = () => {
                                 style={{ borderRadius: '50%' }}
                             />
                         ) : (
-                            <UserAvatar key={user.id} name={user.firstName} />
+                            <UserAvatar key={user.id} name={user.firstName} style={''} />
                         )
                     )
                 ) : (

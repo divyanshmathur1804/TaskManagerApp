@@ -21,10 +21,17 @@ import com.TaskManagerApp.Backend.Repositories.UserRepository;
 @Configuration
 public class SecurityConfig {
 
-    CorsConfigurationSource corsConfigurationSource;
-    
-    public SecurityConfig(CorsConfigurationSource corsConfigurationSource) {
-        this.corsConfigurationSource = corsConfigurationSource;
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:4000", "https://stupendous-sopapillas-409627.netlify.app"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     @Bean
@@ -42,7 +49,7 @@ public SecurityFilterChain filterChain(HttpSecurity http, JWTAuthFilter jwtAuthF
     http
         
         .csrf(csrf -> csrf.disable())
-        .cors(cors -> cors.configurationSource(corsConfigurationSource))
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/api/v1/users/signup", "/api/v1/users/login").permitAll()
             .anyRequest().authenticated()
